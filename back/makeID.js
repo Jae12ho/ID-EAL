@@ -1,10 +1,11 @@
 const axios = require('axios');
 
-const korName = "박민선";
-const initial = "PMS"
-const birthDay = "20001125";
+const korName = "양재호";
+const initial = "YJH"
+const birthDay = "20020412";
 const dot_ = ['._', '._', '_.', '_.', '._.', '_'];
-const nameMeaning = ['들보 양', '재상 재', '호걸 호'];
+const nameMeaning = ['들보', '재상', '호걸'];
+// const nameMeaning = undefined;
 
 const birthStone = {
   '01': ['Garnet'],
@@ -39,11 +40,12 @@ const birthFlower = {
 let answerList = []
 
 async function run() {
-  answerList.push(await hanja_hanja(korName));
-  answerList.push(await birthStone_hanja(birthDay, korName));
-  answerList.push(await birthFlower_hanja(birthDay, korName));
+
+  answerList.push(await hanja_hanja(korName, nameMeaning));
+  answerList.push(await birthStone_hanja(birthDay, korName, nameMeaning));
+  answerList.push(await birthFlower_hanja(birthDay, korName, nameMeaning));
   answerList.push(await birthStone_birthFlower(birthDay));
-  answerList.push(await initial_hanja(korName, initial));
+  answerList.push(await initial_hanja(korName, initial, nameMeaning));
 
   console.log('한자 + 한자 : ', answerList[0]);
   console.log('탄생석 + 한자 : ', answerList[1]);
@@ -54,40 +56,53 @@ async function run() {
 }
 run();
 
-// 한자 + 한자 조합
-async function hanja_hanja(korName) {
-  const n = randomNum(2);
-  let answer = await parse(korName[n]) + dot_[randomNum(dot_.length)] + await parse(korName[n + 1]);
 
-  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-z.]/g, '')];
+// 한자 + 한자 조합
+async function hanja_hanja(korName, nameMeaning=undefined) {
+  const n = randomNum(3);
+  
+  if (nameMeaning) {
+    let answer = await translate(nameMeaning[n]) + dot_[randomNum(dot_.length)] + await translate(nameMeaning[n == 2 ? 0 : n + 1]);
+  
+    return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), nameMeaning[n] + "," + nameMeaning[n == 2 ? 0 : n + 1]];
+
+  } else {
+    let answer = await parse(korName[n]) + dot_[randomNum(dot_.length)] + await parse(korName[n == 2 ? 0 : n + 1]);
+
+    return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-Z.]/g, '')];
+  }
 }
 
 // 탄생석 + 한자 조합
-async function birthStone_hanja(birthDay, korName) {
+async function birthStone_hanja(birthDay, korName, nameMeaning=undefined) {
   let answer = '';
   birthMonth = birthDay.slice(4, 6);
+  const n = randomNum(3);
+  const engWord = nameMeaning ? await translate(nameMeaning[n]) : await parse(korName[n]);
 
   if (randomNum(2)) {
-    answer = await parse(korName[randomNum(3)]) + dot_[randomNum(dot_.length)] + birthStone[birthMonth][randomNum(birthStone[birthMonth].length)];
+    answer = engWord + dot_[randomNum(dot_.length)] + birthStone[birthMonth][randomNum(birthStone[birthMonth].length)];
   } else {
-    answer = birthStone[birthMonth][randomNum(birthStone[birthMonth].length)] + dot_[randomNum(dot_.length)] + await parse(korName[randomNum(3)]);
+    answer = birthStone[birthMonth][randomNum(birthStone[birthMonth].length)] + dot_[randomNum(dot_.length)] + engWord;
   }
 
-  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-z.]/g, '')];
+  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), nameMeaning ? nameMeaning[n] : answer.replace(/[a-zA-Z.]/g, '')];
 }
 
 // 탄생화 + 한자 조합
-async function birthFlower_hanja(birthDay, korName) {
+async function birthFlower_hanja(birthDay, korName, nameMeaning=undefined) {
   let answer = '';
   birthMonth = birthDay.slice(4, 6);
+  const n = randomNum(3);
+  const engWord = nameMeaning ? await translate(nameMeaning[n]) : await parse(korName[n]);
 
   if (randomNum(2)) {
-    answer = await parse(korName[randomNum(3)]) + dot_[randomNum(dot_.length)] + birthFlower[birthMonth];
+    answer = engWord + dot_[randomNum(dot_.length)] + birthFlower[birthMonth];
   } else {
-    answer = birthFlower[birthMonth] + dot_[randomNum(dot_.length)] + await parse(korName[randomNum(3)]);
+    answer = birthFlower[birthMonth] + dot_[randomNum(dot_.length)] + engWord;
   }
 
-  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-z.]/g, '')];
+  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), nameMeaning ? nameMeaning[n] : answer.replace(/[a-zA-Z.]/g, '')];
 }
 
 // 탄생석 + 탄생화 조합
@@ -101,16 +116,18 @@ async function birthStone_birthFlower(birthDay) {
     answer = birthFlower[birthMonth] + dot_[randomNum(dot_.length)] + birthStone[birthMonth][randomNum(birthStone[birthMonth].length)];
   }
 
-  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-z.]/g, '')];
+  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-Z.]/g, '')];
 }
 
-async function initial_hanja(korName, initial) {
+async function initial_hanja(korName, initial, nameMeaning=undefined) {
   let randomNumber = randomNum(3);
   let useInitial = '';
   let answer = '';
+  const n = randomNum(3);
+  const engWord = nameMeaning ? await translate(nameMeaning[n]) : await parse(korName[n]);
 
   if (randomNumber == 0) {
-    useInitial = initial[randomNum(3)];
+    useInitial = initial[n];
   } else if (randomNumber == 1) {
     useInitial = initial.slice(1, 3);
   } else {
@@ -118,17 +135,17 @@ async function initial_hanja(korName, initial) {
   }
 
   if (randomNum(2)) {
-    answer = useInitial + dot_[randomNum(dot_.length)] + await parse(korName[randomNum(3)]);
+    answer = useInitial + dot_[randomNum(dot_.length)] + engWord;
   } else {
-    answer = await parse(korName[randomNum(3)]) + dot_[randomNum(dot_.length)] + useInitial;
+    answer = engWord + dot_[randomNum(dot_.length)] + useInitial;
   }
 
-  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-z.]/g, '')];
+  return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), nameMeaning ? nameMeaning[n] : answer.replace(/[a-zA-Z.]/g, '')];
 }
 
 // random number
 function randomNum(n) {
-  return Math.floor(Math.random() * n)
+  return Math.floor(Math.random() * n);
 }
 
 async function parse(query, nameMeaning=undefined) {
