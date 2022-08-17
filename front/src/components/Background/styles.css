@@ -1,0 +1,13 @@
+.main-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  background-color: #eef7e6;
+
+  /* 격자 그리기 출처(근데 설명이 중국어임;) - https://intrepidgeeks.com/tutorial/is-this-only-css-ok-background-of-checkered-paper-grid */
+  background-image: linear-gradient(90deg, transparent 67px, #f7d0b1 69px),
+    linear-gradient(0deg, transparent 67px, #f7d0b1 69px);
+  background-size: 69px 69px;
+}

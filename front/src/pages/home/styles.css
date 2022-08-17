@@ -1,0 +1,92 @@
+.content-container {
+  margin-top: 32px;
+  padding: 0 28px;
+}
+
+.birth-inputs-container {
+  display: flex;
+}
+
+@media screen and (max-width: 390px) {
+  .content-container {
+    margin-top: 8.2vw;
+  }
+}
+
+/* .main-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  background-color: #eef7e6; */
+
+/* 격자 그리기 출처(근데 설명이 중국어임;) - https://intrepidgeeks.com/tutorial/is-this-only-css-ok-background-of-checkered-paper-grid */
+/* background-image: linear-gradient(90deg, transparent 67px, #f7d0b1 69px),
+    linear-gradient(0deg, transparent 67px, #f7d0b1 69px);
+  background-size: 69px 69px;
+} */
+
+/* .modal {
+  width: 325px;
+  height: 639px;
+
+  background-color: #ffffff;
+  border: solid 2px #000000;
+
+  box-shadow: 5px 6px 1px #000000;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+
+  padding: 0 13px;
+
+  height: 44px;
+
+  background-color: #f5bfbd;
+  border-bottom: solid 2px #000000;
+}
+
+.circle-btn {
+  width: 17px;
+  height: 17px;
+
+  border-radius: 100%;
+  border: solid 2px #000000;
+}
+
+.red {
+  background-color: #f2554b;
+}
+
+.yellow {
+  background-color: #ffcb66;
+  margin: 0 6px;
+}
+
+.green {
+  background-color: #a4d374;
+} */
+
+/* mobile screen */
+/* @media screen and (max-width: 390px) {
+  .modal {
+    width: 83.3vw;
+    height: 163.84vw;
+  }
+
+  .modal-title {
+    height: 11.28vw;
+  }
+
+  .circle-btn {
+    width: 4.36vw;
+    height: 4.36vw;
+  }
+
+  .yellow {
+    margin: 0 1.54vw;
+  }
+} */

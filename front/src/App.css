@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Arcadepix";
+  src: url("./static/fonts/ARCADEPI.TTF");
+}
+
+@font-face {
+  font-family: "Sen";
+  src: url("./static/fonts/sen.regular.ttf");
+}
+
+@font-face {
+  font-family: "ONE-Mobile-Title";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-Title.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
