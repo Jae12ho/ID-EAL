@@ -5,16 +5,16 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.use(cors({ origin: 'http://127.0.0.1:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost'}));
 
 app.get('/get', wrap(async (req, res) => {
-  console.log(req.query);
   res.json(await makeId.run(req.query));
 }))
 
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500);
+  res.end();
 })
 
 function wrap(asyncFn) {
