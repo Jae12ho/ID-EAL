@@ -1,7 +1,6 @@
 import "./styles.css";
 
-export const Modal = (props) => {
-  const { characterImg, children } = props;
+export const MainContainer = ({ characterImg, children }) => {
   return (
     <div className="modal">
       {/* //? 모달 상단 바 */}

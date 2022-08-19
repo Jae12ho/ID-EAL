@@ -32,6 +32,9 @@ const birthFlower = {
 
 async function run({ korName, initial, birthDay, nameMeaning=[] }) {
   console.log(nameMeaning);
+  
+  korName = decodeURIComponent(korName);
+
   const answerList = await Promise.all([
     hanja_hanja(korName, nameMeaning),
     birthStone_hanja(birthDay, korName, nameMeaning),

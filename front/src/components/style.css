@@ -1,0 +1,92 @@
+button.add-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    width: 35px;
+    height: 35px;
+  
+    margin-top: 2px;
+  
+    background: #e3e3e3;
+    box-shadow: inset -3px -3px 0px rgba(0, 0, 0, 0.25);
+  
+    font-family: "ONE Mobile Title";
+    font-size: 21px;
+  
+    color: #23b0b7;
+  }
+  
+  button.add-btn:hover {
+    box-shadow: inset 3px 3px 0px rgba(0, 0, 0, 0.25);
+  }
+  
+  @media screen and (max-width: 390px) {
+    button.add-btn {
+      width: 8.94vw;
+      height: 8.94vw;
+  
+      font-size: 5.38vw;
+    }
+  }
+
+  button.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 100%;
+    height: 35px;
+  
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+  
+    font-family: "ONE-Mobile-Title";
+    font-size: 15px;
+  
+    padding: 9px;
+  }
+  
+  button.submit-btn:hover {
+    cursor: pointer;
+    box-shadow: inset 2px 2px 0px #000000;
+  }
+  
+  @media screen and (max-width: 390px) {
+    button.submit-btn {
+      height: 8.97vw;
+  
+      font-size: 3.84vw;
+    }
+  }
+  
+  .container {
+    /* width: -webkit-fill-available; */
+    width: 100%;
+  
+    padding: 11px 10px;
+    margin-top: 2px;
+  
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: inset 3px 3px 0px rgba(0, 0, 0, 0.25);
+  
+    font-family: "ONE-Mobile-Title";
+    font-size: 12px;
+  }
+  
+  .container::placeholder {
+    color: #ababab;
+  }
+  
+  @media screen and (max-width: 390px) {
+    .container {
+      /* width: 68.7vw; */
+      padding: 2.82vw 2.56vw;
+  
+      font-size: 3.07vw;
+    }
+  }
+  
+  

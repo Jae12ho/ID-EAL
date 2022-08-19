@@ -1,7 +1,6 @@
 import "./styles.css";
 
-export const CustomInput = (props) => {
-  const { name, value, placeholder, style, handleChange, required } = props;
+export const CustomInput = ({ name, value, placeholder, style, handleChange, required }) => {
   return (
     <input
       name={name}
