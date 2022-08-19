@@ -3,8 +3,11 @@
   padding: 0 28px;
 }
 
-.birth-inputs-container {
+.birth-inputs-container,
+.mean-input-container {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 390px) {

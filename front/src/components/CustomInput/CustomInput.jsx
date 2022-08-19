@@ -1,7 +1,7 @@
 import "./styles.css";
 
 export const CustomInput = (props) => {
-  const { name, value, placeholder, style, handleChange } = props;
+  const { name, value, placeholder, style, handleChange, required } = props;
   return (
     <input
       name={name}
@@ -11,6 +11,7 @@ export const CustomInput = (props) => {
       type={"text"}
       placeholder={placeholder}
       onChange={handleChange}
+      required={required}
     ></input>
   );
 };

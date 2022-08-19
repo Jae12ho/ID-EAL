@@ -1,6 +1,7 @@
 import "./styles.css";
 
 export const Modal = (props) => {
+  const { characterImg, children } = props;
   return (
     <div className="modal">
       {/* //? 모달 상단 바 */}
@@ -12,18 +13,23 @@ export const Modal = (props) => {
 
       <div className="modal-contents">
         {/* //? 모달 제목 - ID'eal + 하냥이 사진 */}
-        <p className="modal-contents-title">
-          <span className="title-ID">ID</span>
-          <span className="title-eal">'eal</span>
-        </p>
+        <img
+          src={require("../../static/images/logo/logo.png")}
+          className="logo"
+        />
         {/* //? 하냥이 이미지 */}
-        <div
-          style={{ width: 116, height: 104, backgroundColor: "#f0f0f0" }}
-        ></div>
+        <img
+          src={
+            characterImg
+              ? require("../../static/images/characters/" + characterImg)
+              : ""
+          }
+          className="character"
+        />
       </div>
 
       {/* //? 콘텐츠 */}
-      {props.children}
+      {children}
     </div>
   );
 };

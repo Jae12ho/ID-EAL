@@ -1,0 +1,9 @@
+.result-container {
+  padding: 0 27px;
+}
+
+@media screen and (max-width: 390px) {
+  .result-container {
+    padding: 0 6.92vw;
+  }
+}

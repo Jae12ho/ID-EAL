@@ -5,6 +5,7 @@
 
   height: 100vh;
   background-color: #eef7e6;
+  /* background: linear-gradient(167.95deg, #eef7e6 0%, #f7f3d3 100%); */
 
   /* 격자 그리기 출처(근데 설명이 중국어임;) - https://intrepidgeeks.com/tutorial/is-this-only-css-ok-background-of-checkered-paper-grid */
   background-image: linear-gradient(90deg, transparent 67px, #f7d0b1 69px),

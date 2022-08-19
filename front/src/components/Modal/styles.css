@@ -1,6 +1,7 @@
 .modal {
   width: 325px;
-  height: 639px;
+  /* height: 639px; */
+  padding-bottom: 66px;
 
   background-color: #ffffff;
   border: solid 2px #000000;
@@ -64,11 +65,24 @@
   font-size: 35px;
 }
 
+.logo {
+  width: 122px;
+  height: 51px;
+}
+
+.character {
+  width: 199px;
+  height: 119px;
+
+  margin-top: 7px;
+}
+
 /* mobile screen */
 @media screen and (max-width: 390px) {
   .modal {
     width: 83.3vw;
-    height: 163.84vw;
+    /* height: 163.84vw; */
+    padding-bottom: 16.92vw;
   }
 
   .modal-title {
@@ -97,5 +111,17 @@
 
   .title-eal {
     font-size: 8.97vw;
+  }
+
+  .logo {
+    width: 31.28vw;
+    height: 13.07vw;
+  }
+
+  .character {
+    width: 51.02vw;
+    height: 30.51vw;
+
+    margin-top: 1.79vw;
   }
 }
