@@ -1,11 +1,10 @@
 const makeId = require('./makeID');
 const cors = require('cors');
-const http = require('http');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 80;
 
-app.use(cors({ origin: 'http://localhost'}));
+app.use(cors({ origin: ['http://localhost:3000', 'http://localhost']}));
 
 app.get('/get', wrap(async (req, res) => {
   res.json(await makeId.run(req.query));
@@ -28,5 +27,5 @@ function wrap(asyncFn) {
 }
 
 app.listen(port, () => {
-    console.log(`server is listening at localhost:${process.env.PORT}`);
+    console.log(`server is listening at localhost:${port}`);
 });

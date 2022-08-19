@@ -7,7 +7,7 @@ function App() {
   const [list, setList] = useState([]);
 
   const get = () => {
-    axios.get('http://127.0.0.1:4000/get',{
+    axios.get('http://127.0.0.1/get',{
       params: {
         korName: "양재호",
         initial: "YJH",
