@@ -7,12 +7,12 @@ function App() {
   const [list, setList] = useState([]);
 
   const get = () => {
-    axios.get('http://127.0.0.1/get',{
+    axios.get('http://43.200.104.40/get',{
       params: {
-        korName: "양재호",
-        initial: "YJH",
-        birthDay: "20020412",
-        nameMeaning: ['들보', '재상', '호걸'],
+        korName: "장정우",
+        initial: "JJW",
+        birthDay: "20010903",
+        nameMeaning: ['베풀다', '도울'],
       }
     })
       .then(res => {
