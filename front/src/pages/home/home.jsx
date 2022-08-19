@@ -52,7 +52,6 @@ export const Home = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
     console.log(inputs);
   };
 
