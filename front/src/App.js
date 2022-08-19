@@ -4,7 +4,7 @@ import { Home } from "./pages/home/home";
 import { Result } from "./pages/result/result";
 
 function App() {
-  return <Home />;
+  return <Result />;
 }
 
 export default App;
