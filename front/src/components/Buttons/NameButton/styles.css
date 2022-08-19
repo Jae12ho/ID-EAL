@@ -1,0 +1,60 @@
+.name-button {
+  display: flex;
+  width: 100%;
+
+  margin-top: 9px;
+  padding: 9px 0;
+
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25);
+
+  font-family: "ONE-Mobile-Title";
+  font-size: 15px;
+
+  color: #000000;
+}
+
+.name-button:hover {
+  box-shadow: inset 3px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.name-button > .copy-button {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
+  width: 14px;
+  height: 14px;
+
+  background: #d9d9d9;
+  border: 1px solid #000000;
+}
+
+.name-button > .copy-button:hover {
+  cursor: pointer;
+}
+
+.name-button > .copy-button > img {
+  width: 8px;
+  height: 9px;
+}
+
+@media screen and (max-width: 390px) {
+  .name-button {
+    margin-top: 2.4vw;
+    padding: 2.4vw 0;
+
+    font-size: 3.84vw;
+  }
+
+  .name-button > .copy-button {
+    width: 3.59vw;
+    height: 3.59vw;
+  }
+
+  .name-button > .copy-button > img {
+    width: 2.05vw;
+    height: 2.3vw;
+  }
+}
