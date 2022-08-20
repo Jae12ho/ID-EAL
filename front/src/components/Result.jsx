@@ -4,7 +4,6 @@ import { NameButton } from "./Buttons/NameButton/NameButton";
 import { MainContainer } from "./MainContainer/MainContainer";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { SubmitButton } from "./Buttons/SubmitButton/SubmitButton";
 import { useMediaQuery } from "react-responsive";
 
 const Result = ({ inputs }) => {
@@ -19,15 +18,21 @@ const Result = ({ inputs }) => {
     console.log(inputs.korName);
     console.log(inputs.initial)
     console.log(inputs.birthYear + inputs.birthMonth + inputs.birthDay)
-    const a = inputs.birthYear + inputs.birthMonth + inputs.birthDay;
     console.log(inputs.nameMeaning)
+
+    const tmp = []
+    inputs.nameMeaning.map(e => {
+      if (e && (e !== '' || e !== 'undefined')) {
+        tmp.push(e);
+      }
+    })
 
     axios.get("http://43.200.104.40/get", {
       params: {
-        korName: encodeURIComponent(inputs.korName),
+        korName: inputs.korName,
         initial: inputs.initial,
-        birthDay: a,
-        nameMeaning: inputs.nameMeaning,
+        birthDay: inputs.birthYear + inputs.birthMonth + inputs.birthDay,
+        nameMeaning: tmp
       }
     }).then((res) => {
     console.log(res.data);
@@ -42,9 +47,9 @@ const Result = ({ inputs }) => {
   }
 
   return (
-    <div>
-      {nameList.map((value, index) => (
-        <NameButton key={index}>{value}</NameButton>
+    <div className="content-container">
+      {nameList.map((e, index) => (
+        <NameButton key={index}>{e[0]}</NameButton>
       ))}
       <button className="submit-btn" onClick={onSubmit} style={{marginTop: isPC ? "26px" : "6.66vw", backgroundColor: "#D7D2FF"}}>한 번 더 추천 받기</button>
     </div>

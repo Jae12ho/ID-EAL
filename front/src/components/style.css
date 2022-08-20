@@ -89,4 +89,9 @@ button.add-btn {
     }
   }
   
-  
+  .birth-inputs-container,
+  .nameMeaning-input-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }

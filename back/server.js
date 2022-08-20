@@ -7,11 +7,12 @@ const port = 80;
 app.use(cors({ origin: ['http://localhost:3000', 'http://localhost']}));
 
 app.get('/get', wrap(async (req, res) => {
+  console.log(req.query);
   res.json(await makeId.run(req.query));
 }))
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  // console.log(err);
   res.status(500);
   res.end();
 })

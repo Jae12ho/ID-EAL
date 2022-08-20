@@ -31,10 +31,7 @@ const birthFlower = {
 }
 
 async function run({ korName, initial, birthDay, nameMeaning=[] }) {
-  console.log(nameMeaning);
   
-  korName = decodeURIComponent(korName);
-
   const answerList = await Promise.all([
     hanja_hanja(korName, nameMeaning),
     birthStone_hanja(birthDay, korName, nameMeaning),
@@ -42,12 +39,6 @@ async function run({ korName, initial, birthDay, nameMeaning=[] }) {
     birthStone_birthFlower(birthDay),
     initial_hanja(korName, initial, nameMeaning),
   ]);
-
-  console.log('한자 + 한자 : ', answerList[0]);
-  console.log('탄생석 + 한자 : ', answerList[1]);
-  console.log('탄생화 + 한자 : ', answerList[2]);
-  console.log('탄생석 + 탄생화 : ', answerList[3]);
-  console.log('이니셜 + 한자 : ', answerList[4]);
 
   return answerList;
 }
@@ -57,8 +48,7 @@ async function hanja_hanja(korName, nameMeaning=[]) {
   const n = randomNum(korName.length);
 
   if (!nameMeaning.length) {
-    const answer = await parse(korName[n]) + dot_[randomNum(dot_.length)] + await parse(korName[n === korName.length - 1 ? 0 : n + 1]);
-
+    const answer = await extractMeaning(korName[n]) + dot_[randomNum(dot_.length)] + await extractMeaning(korName[n === korName.length - 1 ? 0 : n + 1]);
     return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), answer.replace(/[a-zA-Z._]/g, '')];
 
 
@@ -71,7 +61,7 @@ async function hanja_hanja(korName, nameMeaning=[]) {
 
 
   } else {
-    const answer = await translate(nameMeaning[0]) + dot_[randomNum(dot_.length)] + await parse(korName[n]);
+    const answer = await translate(nameMeaning[0]) + dot_[randomNum(dot_.length)] + await extractMeaning(korName[n]);
 
     return [answer.replace(/[ㄱ-ㅎ가-힣,\s]/g, ''), nameMeaning[0] + answer.replace(/[a-zA-Z._]/g, '')];
   }
@@ -83,7 +73,7 @@ async function birthStone_hanja(birthDay, korName, nameMeaning=[]) {
   birthMonth = birthDay.slice(4, 6);
   const n = randomNum(korName.length);
   const m = randomNum(nameMeaning.length);
-  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await parse(korName[n]);
+  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await extractMeaning(korName[n]);
 
   if (randomNum(2)) {
     answer = engWord + dot_[randomNum(dot_.length)] + birthStone[birthMonth][randomNum(birthStone[birthMonth].length)];
@@ -101,7 +91,7 @@ async function birthFlower_hanja(birthDay, korName, nameMeaning=[]) {
   const n = randomNum(korName.length);
   const m = randomNum(nameMeaning.length);
 
-  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await parse(korName[n]);
+  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await extractMeaning(korName[n]);
 
   if (randomNum(2)) {
     answer = engWord + dot_[randomNum(dot_.length)] + birthFlower[birthMonth];
@@ -133,7 +123,7 @@ async function initial_hanja(korName, initial, nameMeaning=[]) {
   const n = randomNum(korName.length);
   const m = randomNum(nameMeaning.length);
 
-  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await parse(korName[n]);
+  const engWord = nameMeaning.length ? await translate(nameMeaning[m]) : await extractMeaning(korName[n]);
 
   if (randomNumber === 0) {
     useInitial = initial[n];
@@ -157,7 +147,7 @@ function randomNum(n) {
   return Math.floor(Math.random() * n);
 }
 
-async function parse(query) {
+async function extractMeaning(query) {
   const { data } = await axios.get(
     `https://hanja.dict.naver.com/api3/ccko/search?query=${stringToHex(query, '%')}&m=pc&range=all`,
     {
@@ -167,9 +157,7 @@ async function parse(query) {
     },
   );
 
-  const words = data.searchResultMap.searchResultListMap.constTER.items.map(e => (
-    e.expKoreanPron.replace(/<strong>/g, '').replace(/<\/strong>/g, '').replace(/\//g, ',')
-  ))
+  const words = data.searchResultMap.searchResultListMap.LETTER.items.map(e => e.expKoreanPron.replace(/<strong>/g, '').replace(/<\/strong>/g, '').replace(/\//g, ','));
 
   const a = []
   words.map(e => {
@@ -183,15 +171,12 @@ async function parse(query) {
       a.push(e.replace(/\([^\)]*\)/g, '').slice(0, -1));
     }
   })
-
   result = a.map(e => e.replace(/ /g, ''));
-  // console.log(result);
 
   const word = result[randomNum(result.length)];
 
   return [await translate(word), word + " " + query];
 }
-
 
 // Meaning to English
 async function translate(query) {
@@ -205,7 +190,6 @@ async function translate(query) {
   );
   
   const dataValues = data.searchResultMap.searchResultListMap.WORD.items.map(e => e.meansCollector[0].means[0].value)
-  // console.log("데이터 값 : ", dataValues);
 
   const words = []
   dataValues.map(e => {
@@ -221,8 +205,6 @@ async function translate(query) {
       })
     }
   })
-
-  // console.log(words);
 
   return words[randomNum(words.length)] ?? 'o';
 }
