@@ -95,3 +95,20 @@ button.add-btn {
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
+  .circle {
+    border: 7px solid rgb(225, 225, 225);
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    border-top: 7px solid rgb(200, 200, 200);
+    animation: rotate_image 1s linear infinite;
+    transform-origin: 50% 50%;
+    margin: auto;
+}
+
+@keyframes rotate_image{
+    100% {
+        transform: rotate(360deg);
+    }
+}
